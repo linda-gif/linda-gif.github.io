@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="shunxubiao, linda">
+    <meta name="keywords" content="两数反转, linda">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>shunxubiao | linda</title>
+    <title>两数反转 | linda</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">shunxubiao</h1>
+                    <h1 class="description center-align post-title">两数反转</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
-                                <span class="chip bg-color">数据结构与算法</span>
+                            <a href="/tags/leetcode%E5%88%B7%E9%A2%98/">
+                                <span class="chip bg-color">leetcode刷题</span>
                             </a>
                         
                     </div>
@@ -456,14 +456,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    474
+                    360
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    1 分
                 </div>
                 
 
@@ -473,163 +473,60 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>实现代码为C语言，教材为清华大学严蔚敏版。</p>
-<pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">&lt;stdio.h></span></span>
- <span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">&lt;stdlib.h></span></span>
- <span class="token macro property">#<span class="token directive keyword">define</span> OK 1</span>
- <span class="token macro property">#<span class="token directive keyword">define</span> ERROR 0</span>
- <span class="token macro property">#<span class="token directive keyword">define</span> MAXSIZE 100</span>
- <span class="token keyword">typedef</span> <span class="token keyword">int</span> Status<span class="token punctuation">;</span>
- <span class="token keyword">typedef</span> <span class="token keyword">int</span> ElemType<span class="token punctuation">;</span>
- <span class="token keyword">typedef</span> <span class="token keyword">struct</span>
- <span class="token punctuation">{</span>
-     ElemType <span class="token operator">*</span>elem<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//*elem存储空间的基地址</span>
-     <span class="token keyword">int</span> length<span class="token punctuation">;</span>
-
- <span class="token punctuation">}</span>Sqlist<span class="token punctuation">;</span>
- Sqlist L<span class="token punctuation">;</span>
- Status <span class="token function">Initlist</span><span class="token punctuation">(</span>Sqlist <span class="token operator">&amp;</span>L<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//构造一个空的线性表</span>
- <span class="token punctuation">{</span>
-     L<span class="token punctuation">.</span>elem<span class="token operator">=</span>new ElemType<span class="token punctuation">[</span>MAXSIZE<span class="token punctuation">]</span><span class="token punctuation">;</span>
-     <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>L<span class="token punctuation">.</span>elem<span class="token punctuation">)</span>
-     <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
-     L<span class="token punctuation">.</span>length<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-     <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
-
- <span class="token punctuation">}</span>
-
- <span class="token keyword">int</span> <span class="token function">GetElem</span><span class="token punctuation">(</span>Sqlist L<span class="token punctuation">,</span><span class="token keyword">int</span> i<span class="token punctuation">,</span>ElemType <span class="token operator">&amp;</span>e<span class="token punctuation">)</span>
- <span class="token punctuation">{</span>
-     <span class="token keyword">if</span><span class="token punctuation">(</span>i<span class="token operator">&lt;</span><span class="token number">1</span><span class="token operator">||</span>i<span class="token operator">></span>L<span class="token punctuation">.</span>length<span class="token punctuation">)</span>
-     <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
-     e<span class="token operator">=</span>L<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//第i-1个单元存储着第i个数据</span>
-     <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
-
- <span class="token punctuation">}</span>
-
- <span class="token comment" spellcheck="true">//清空线性表</span>
- <span class="token keyword">int</span> <span class="token function">ClearList</span><span class="token punctuation">(</span>Sqlist <span class="token operator">&amp;</span>L<span class="token punctuation">)</span>
- <span class="token punctuation">{</span>
-     L<span class="token punctuation">.</span>length<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-     <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
- <span class="token punctuation">}</span>
-
-<span class="token comment" spellcheck="true">//判断线性表是否为空</span>
-<span class="token keyword">int</span> <span class="token function">IsEmpty</span><span class="token punctuation">(</span>Sqlist L<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>L<span class="token punctuation">.</span>length<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token comment" spellcheck="true">//获取线性表的长度</span>
-<span class="token keyword">int</span> <span class="token function">Getlength</span><span class="token punctuation">(</span>Sqlist L<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">return</span><span class="token punctuation">(</span>L<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">int</span> <span class="token function">DestoryList</span><span class="token punctuation">(</span>Sqlist <span class="token operator">&amp;</span>L<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>L<span class="token punctuation">.</span>elem<span class="token punctuation">)</span>
-    delete L<span class="token punctuation">.</span>elem<span class="token punctuation">;</span>
-    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
-
-<span class="token punctuation">}</span>
-
-Status <span class="token function">locateElem</span><span class="token punctuation">(</span>Sqlist <span class="token operator">&amp;</span>L<span class="token punctuation">,</span>ElemType e <span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">int</span> i<span class="token punctuation">;</span>
-    <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>L<span class="token punctuation">.</span>length<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>L<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">==</span>e<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
-
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-Status <span class="token function">ListInsert</span><span class="token punctuation">(</span>Sqlist <span class="token operator">&amp;</span>L<span class="token punctuation">,</span><span class="token keyword">int</span> i<span class="token punctuation">,</span>ElemType e<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>i<span class="token operator">&lt;</span><span class="token number">1</span><span class="token operator">||</span>i<span class="token operator">></span>L<span class="token punctuation">.</span>length<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>L<span class="token punctuation">.</span>length<span class="token operator">==</span>MAXSIZE<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
-    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j<span class="token operator">=</span>L<span class="token punctuation">.</span>length<span class="token number">-1</span><span class="token punctuation">;</span>j<span class="token operator">>=</span>i<span class="token number">-1</span><span class="token punctuation">;</span>j<span class="token operator">--</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        L<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>j<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">=</span>L<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-    <span class="token punctuation">}</span>
-    L<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token operator">=</span>e<span class="token punctuation">;</span>
-    L<span class="token punctuation">.</span>length<span class="token operator">++</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
-
-
-<span class="token punctuation">}</span>
-
-
-<span class="token keyword">int</span> <span class="token function">ListDelete</span><span class="token punctuation">(</span>Sqlist <span class="token operator">&amp;</span>L<span class="token punctuation">,</span><span class="token keyword">int</span> i<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span>i<span class="token operator">&lt;</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">||</span><span class="token punctuation">(</span>i<span class="token operator">></span>L<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
-    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j<span class="token operator">=</span>i<span class="token punctuation">;</span>j<span class="token operator">&lt;</span>L<span class="token punctuation">.</span>length<span class="token number">-1</span><span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span>
-     L<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span><span class="token operator">=</span>L<span class="token punctuation">.</span>elem<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
-     L<span class="token punctuation">.</span>length<span class="token operator">--</span><span class="token punctuation">;</span>
-     <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
-
-
-<span class="token punctuation">}</span>
-
-<span class="token comment" spellcheck="true">//主函数测试</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">Initlist</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Initlist success!\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token keyword">int</span> i<span class="token punctuation">;</span>
-        ElemType e<span class="token punctuation">;</span>
-        <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">10</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token function">ListInsert</span><span class="token punctuation">(</span>L<span class="token punctuation">,</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//测试InsertList函数</span>
-
-
-        <span class="token punctuation">}</span>
-
-
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Length is %d\n"</span><span class="token punctuation">,</span><span class="token function">Getlength</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">GetElem</span><span class="token punctuation">(</span>L<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the first element %d\n"</span><span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">else</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"element is not exist\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">locateElem</span><span class="token punctuation">(</span>L<span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the element is locate at %d\n"</span><span class="token punctuation">,</span><span class="token function">locateElem</span><span class="token punctuation">(</span>L<span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">else</span>
-        <span class="token punctuation">{</span>
-            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the element is not exist"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-
-        <span class="token punctuation">}</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">ListDelete</span><span class="token punctuation">(</span>L<span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"delect ok"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">IsEmpty</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"List is empty"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">else</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"list is not empty"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">DestoryList</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"destory success\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">ClearList</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"clear success"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-
-    <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-
-</code></pre>
+                <p>题目描述</p>
+<p>给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。</p>
+<p>示例 1:</p>
+<p>输入: 123<br>输出: 321<br> 示例 2:</p>
+<p>输入: -123<br>输出: -321<br>示例 3:</p>
+<p>输入: 120<br>输出: 21<br>注意:</p>
+<p>假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−231,  231 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/reverse-integer" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-integer</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>`#include&lt;stdio.h&gt;`</p>
+<p><code>int reverse(int x){</code></p>
+<p>  <code>int digit=0;</code></p>
+<p>  <code>int ret=0;</code></p>
+<p>  <code>int flag;</code></p>
+<p>  <code>flag=1;</code></p>
+<p>  <code>if(x&lt;0)</code></p>
+<p>  <code>{</code></p>
+<p>​    <code>flag=-1;</code></p>
+<p>​    <code>x=-x;</code></p>
+<p>  <code>}</code></p>
+<p>  <code>while(x&gt;0)</code></p>
+<p>  <code>{</code></p>
+<p>​    <code>digit=x%10;//得到最后一位数</code></p>
+<p>​    <code>ret=ret*10+digit;</code></p>
+<p>​    <code>x=x/10;</code></p>
+<p>  <code>}</code></p>
+<p>  <code>return flag*ret;</code></p>
+<p><code>}</code></p>
+<p><code>int main()</code></p>
+<p><code>{</code></p>
+<p>  <code>int x;</code></p>
+<p> <code>// scanf("%d,&amp;x");</code></p>
+<p>  <code>x=123;</code></p>
+<p>  <code>int ret;</code></p>
+<p>  <code>ret=0;</code></p>
+<p>  <code>ret=reverse(x);</code></p>
+<p>`` </p>
+<p>  <code>printf("%d",ret);</code></p>
+<p>  <code>return 0;</code></p>
+<p><code>}</code></p>
+<p>vscode上能运行出来，但是总归是不够完善</p>
+<p>leetcode代码提交出现越界问题</p>
+<p>下面参照别人的代码</p>
+<p><code>int reverse(int x){</code></p>
+<p>  <code>long temp,result=0;</code></p>
+<p>  <code>if(x&gt;1534236461)</code> </p>
+<p>  <code>return 0;</code></p>
+<p>  <code>while(x){</code></p>
+<p>​    <code>temp=x%10;</code></p>
+<p>​    <code>x=x/10;</code></p>
+<p>​    <code>result=result*10+temp;</code></p>
+<p>  <code>}</code></p>
+<p>  <code>if(result&gt;2147483642||result&lt;(-2147483641)) return 0;</code></p>
+<p>  <code>return result;</code></p>
+<p><code>}</code></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -673,7 +570,7 @@ Status <span class="token function">ListInsert</span><span class="token punctuat
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://linda-gif.github.io/2020/05/30/shunxubiao/">http://linda-gif.github.io/2020/05/30/shunxubiao/</a>
+                    <a href="http://linda-gif.github.io/2020/05/30/liang-shu-fan-zhuan/">http://linda-gif.github.io/2020/05/30/liang-shu-fan-zhuan/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -711,8 +608,8 @@ Status <span class="token function">ListInsert</span><span class="token punctuat
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
-                                    <span class="chip bg-color">数据结构与算法</span>
+                                <a href="/tags/leetcode%E5%88%B7%E9%A2%98/">
+                                    <span class="chip bg-color">leetcode刷题</span>
                                 </a>
                             
                         </div>
@@ -902,9 +799,10 @@ Status <span class="token function">ListInsert</span><span class="token punctuat
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/05/30/liang-shu-fan-zhuan/">
                     <div class="card-image">
@@ -928,9 +826,9 @@ Status <span class="token function">ListInsert</span><span class="token punctuat
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-30
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-30
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -939,6 +837,7 @@ Status <span class="token function">ListInsert</span><span class="token punctuat
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -957,24 +856,30 @@ Status <span class="token function">ListInsert</span><span class="token punctuat
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/26/hello-world/">
+                <a href="/2020/05/30/shunxubiao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="shunxubiao">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">shunxubiao</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+                            实现代码为C语言，教材为清华大学严蔚敏版。
+#include&lt;stdio.h>
+ #include&lt;stdlib.h>
+ #define OK 1
+ #define ERROR 0
+ #define MAXSIZE 100
+ t
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-26
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-30
                             </span>
                         <span class="publish-author">
                             
@@ -983,6 +888,14 @@ Status <span class="token function">ListInsert</span><span class="token punctuat
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">数据结构与算法</span>
+                    </a>
+                    
                 </div>
                 
             </div>
