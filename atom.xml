@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linda-gif.github.io/"/>
-  <updated>2020-06-03T14:54:00.476Z</updated>
+  <updated>2020-06-03T15:20:55.109Z</updated>
   <id>http://linda-gif.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://linda-gif.github.io/2020/06/03/xun-huan-dui-lie/"/>
     <id>http://linda-gif.github.io/2020/06/03/xun-huan-dui-lie/</id>
     <published>2020-06-03T14:52:32.000Z</published>
-    <updated>2020-06-03T14:54:00.476Z</updated>
+    <updated>2020-06-03T15:20:55.109Z</updated>
     
     <summary type="html">
     
@@ -29,10 +29,8 @@
       
         
         
-          &lt;p&gt;直接上代码&lt;/p&gt;
-&lt;p&gt;`#include&amp;lt;stdio.h&amp;gt;`&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;\#include&amp;lt;stdlib.h&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;\#define TRUE 
+          &lt;p&gt;直接上代码&lt;br&gt;实现语言为C语言&lt;/p&gt;
+&lt;pre class=&quot; language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token macro property&quot;&gt;#&lt;span class=&quot;token directive
         
       
     
@@ -74,11 +72,11 @@
   </entry>
   
   <entry>
-    <title>shunxubiao</title>
+    <title>顺序表</title>
     <link href="http://linda-gif.github.io/2020/05/30/shunxubiao/"/>
     <id>http://linda-gif.github.io/2020/05/30/shunxubiao/</id>
     <published>2020-05-30T08:16:09.000Z</published>
-    <updated>2020-05-30T08:28:54.427Z</updated>
+    <updated>2020-06-03T15:20:59.019Z</updated>
     
     <summary type="html">
     
@@ -87,7 +85,7 @@
         
         
           &lt;p&gt;实现代码为C语言，教材为清华大学严蔚敏版。&lt;/p&gt;
-&lt;pre class=&quot; language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token macro property&quot;&gt;#&lt;span class=&quot;token
+&lt;pre class=&quot; language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt; &lt;span class=&quot;token macro property&quot;&gt;#&lt;span class=&quot;token
         
       
     
