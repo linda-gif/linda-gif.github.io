@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="两数反转, linda">
+    <meta name="keywords" content="循环队列, linda">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>两数反转 | linda</title>
+    <title>循环队列 | linda</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">两数反转</h1>
+                    <h1 class="description center-align post-title">循环队列</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/leetcode%E5%88%B7%E9%A2%98/">
-                                <span class="chip bg-color">leetcode刷题</span>
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+                                <span class="chip bg-color">数据结构与算法</span>
                             </a>
                         
                     </div>
@@ -447,7 +447,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-30
+                    2020-06-03
                 </div>
                 
 
@@ -456,14 +456,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    360
+                    514
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -473,59 +473,141 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>题目描述</p>
-<p>给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。</p>
-<p>示例 1:</p>
-<p>输入: 123<br>输出: 321<br> 示例 2:</p>
-<p>输入: -123<br>输出: -321<br>示例 3:</p>
-<p>输入: 120<br>输出: 21<br>注意:</p>
-<p>假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−231,  231 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/reverse-integer" target="_blank" rel="noopener">https://leetcode-cn.com/problems/reverse-integer</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+                <p>直接上代码</p>
 <p>`#include&lt;stdio.h&gt;`</p>
-<p><code>int reverse(int x){</code></p>
-<p>  <code>int digit=0;</code></p>
-<p>  <code>int ret=0;</code></p>
-<p>  <code>int flag;</code></p>
-<p>  <code>flag=1;</code></p>
-<p>  <code>if(x&lt;0)</code></p>
-<p>  <code>{</code></p>
-<p>​    <code>flag=-1;</code></p>
-<p>​    <code>x=-x;</code></p>
+<p><code>\#include&lt;stdlib.h&gt;</code></p>
+<p><code>\#define TRUE  1</code></p>
+<p><code>\#define FALSE  0</code></p>
+<p><code>\#define OK   1</code></p>
+<p><code>\#define ERROR  0</code></p>
+<p><code>\#define INFEASIBLE -1</code></p>
+<p><code>\#define OVERFLOW  -2</code></p>
+<p><code>\#define MAXSIZE  100</code></p>
+<p><code>typedef int QElemType;</code></p>
+<p><code>typedef int Status;</code></p>
+<p><code>typedef struct{</code></p>
+<p>  <code>QElemType *base;//初始化的动态分配内存空间</code></p>
+<p>  <code>int Front;//头指针</code></p>
+<p>  <code>int Rear;//尾指针</code></p>
+<p><code>}SqQueue;</code></p>
+<p><code>// 构造空队列</code></p>
+<p><code>Status InitQueue(SqQueue &amp;Q){</code></p>
+<p>`` </p>
+<p>  <code>Q.base = new QElemType[MAXSIZE];  // 分配数组空间</code></p>
+<p>  <code>if (!Q.base)</code> </p>
+<p>  <code>return ERROR;</code></p>
+<p>  <code>Q.Front = 0;            // 头指针 尾指针为0, 队列为空</code></p>
+<p>  <code>Q.Rear = 0;</code></p>
+<p>  <code>return OK;</code></p>
+<p><code>}</code></p>
+<p>`` </p>
+<p><code>// 销毁队列</code></p>
+<p><code>Status DestroyQueue(SqQueue &amp;Q){</code></p>
+<p>  <code>if (!Q.base) return ERROR;</code></p>
+<p>  <code>delete Q.base;</code></p>
+<p>  <code>Q.base = NULL;</code></p>
+<p>``  </p>
+<p>  <code>return OK;</code></p>
+<p><code>}</code></p>
+<p>`` </p>
+<p><code>// 清空队列</code></p>
+<p><code>Status ClearQueue(SqQueue &amp;Q){</code></p>
+<p>  <code>if (Q.Front == Q.Rear) return ERROR;  // 已经是空表</code></p>
+<p>  <code>Q.Rear = Q.Front;</code></p>
+<p>``  </p>
+<p>  <code>return OK;</code></p>
+<p><code>}</code></p>
+<p>`` </p>
+<p><code>// 求队列长度</code></p>
+<p><code>int QueueLength(SqQueue Q){</code></p>
+<p>`` </p>
+<p>  <code>return ((Q.Rear-Q.Front+MAXSIZE)%MAXSIZE);</code></p>
+<p><code>}</code></p>
+<p>`` </p>
+<p><code>// 用e返回Q的队头元素</code></p>
+<p><code>Status GetHead(SqQueue Q, QElemType &amp;e){</code></p>
+<p>  <code>if (Q.Front == Q.Rear)</code></p>
+<p>​    <code>return ERROR;      // 队不能为空</code></p>
+<p>  <code>e = Q.base[Q.Front];    // 返回队头指针元素, 队头指针不变</code></p>
+<p>  <code>return OK;</code></p>
+<p><code>}</code></p>
+<p>`` </p>
+<p><code>// 插入元素e为Q的队尾元素(入队)</code></p>
+<p><code>Status EnQueue(SqQueue &amp;Q, QElemType e){</code></p>
+<p>`` </p>
+<p>  <code>if ((Q.Rear+1)%MAXSIZE == Q.Front) return ERROR;  // 队满</code></p>
+<p>  <code>Q.base[Q.Rear] = e;     // 新元素加入队尾</code></p>
+<p>  <code>Q.Rear = (Q.Rear+1)%MAXSIZE;  // 队尾指针+1</code></p>
+<p>  <code>return OK;</code></p>
+<p><code>}</code></p>
+<p>`` </p>
+<p><code>// 删除Q的队头元素，用e返回(出队)</code></p>
+<p><code>Status DeQueue(SqQueue &amp;Q, QElemType &amp;e){</code></p>
+<p>`` </p>
+<p>  <code>if (Q.Rear == Q.Front) return ERROR; // 队空</code></p>
+<p>  <code>e = Q.base[Q.Front];        // 保存队头元素</code></p>
+<p>  <code>Q.Front = (Q.Front+1)%MAXSIZE; // 队头指针+1</code></p>
+<p>  <code>return OK;</code></p>
+<p><code>}</code></p>
+<p>`` </p>
+<p><code>// 遍历队列</code></p>
+<p><code>Status TraverseQueue(SqQueue Q){</code></p>
+<p>`` </p>
+<p>  <code>if (Q.Front == Q.Rear) return ERROR;</code></p>
+<p>`` </p>
+<p>  <code>int temp = Q.Front;</code></p>
+<p>  <code>while (temp &lt; Q.Rear){</code></p>
+<p>``   </p>
+<p>​    <code>printf("%d ",Q.base[temp]);</code></p>
+<p>​    <code>temp++;</code></p>
 <p>  <code>}</code></p>
-<p>  <code>while(x&gt;0)</code></p>
-<p>  <code>{</code></p>
-<p>​    <code>digit=x%10;//得到最后一位数</code></p>
-<p>​    <code>ret=ret*10+digit;</code></p>
-<p>​    <code>x=x/10;</code></p>
-<p>  <code>}</code></p>
-<p>  <code>return flag*ret;</code></p>
+<p>``  </p>
+<p>  <code>return OK;</code></p>
 <p><code>}</code></p>
 <p><code>int main()</code></p>
 <p><code>{</code></p>
-<p>  <code>int x;</code></p>
-<p> <code>// scanf("%d,&amp;x");</code></p>
-<p>  <code>x=123;</code></p>
-<p>  <code>int ret;</code></p>
-<p>  <code>ret=0;</code></p>
-<p>  <code>ret=reverse(x);</code></p>
+<p>  <code>SqQueue Q;</code></p>
+<p>  <code>QElemType e=0;</code></p>
+<p>``  </p>
+<p>  <code>if(InitQueue(Q))</code></p>
+<p>   <code>printf("Initstack success\n");</code></p>
+<p>``  </p>
+<p>  <code>//执行入栈操作</code></p>
+<p>  <code>e=11;</code></p>
+<p>  <code>EnQueue(Q,e);</code></p>
+<p>  <code>e=22;</code></p>
+<p>  <code>EnQueue(Q,e);</code></p>
+<p>  <code>e=33;</code></p>
+<p>  <code>EnQueue(Q,e);</code></p>
 <p>`` </p>
-<p>  <code>printf("%d",ret);</code></p>
-<p>  <code>return 0;</code></p>
-<p><code>}</code></p>
-<p>vscode上能运行出来，但是总归是不够完善</p>
-<p>leetcode代码提交出现越界问题</p>
-<p>下面参照别人的代码</p>
-<p><code>int reverse(int x){</code></p>
-<p>  <code>long temp,result=0;</code></p>
-<p>  <code>if(x&gt;1534236461)</code> </p>
-<p>  <code>return 0;</code></p>
-<p>  <code>while(x){</code></p>
-<p>​    <code>temp=x%10;</code></p>
-<p>​    <code>x=x/10;</code></p>
-<p>​    <code>result=result*10+temp;</code></p>
+<p>   <code>printf("the length of the queue is %d\n",(QueueLength(Q)));</code></p>
+<p>`` </p>
+<p>  <code>if(GetHead(Q,e))</code></p>
+<p>  <code>{</code></p>
+<p>​     <code>printf("the Gethead element is %d\n",e);</code></p>
 <p>  <code>}</code></p>
-<p>  <code>if(result&gt;2147483642||result&lt;(-2147483641)) return 0;</code></p>
-<p>  <code>return result;</code></p>
+<p>``    </p>
+<p>  <code>if(DeQueue(Q,e))</code></p>
+<p>  <code>{</code></p>
+<p>   <code>printf("the delete of the element is %d\n",e);</code></p>
+<p>`` </p>
+<p>  <code>}</code></p>
+<p>``  </p>
+<p>  <code>TraverseQueue(Q);</code></p>
+<p>``  </p>
+<p>``  </p>
+<p>  <code>if(ClearQueue(Q))</code> </p>
+<p>  <code>{</code></p>
+<p>​    <code>printf("clear success!\n");</code></p>
+<p>``  </p>
+<p>  <code>}</code></p>
+<p>`` </p>
+<p>  <code>if(DestroyQueue(Q))</code></p>
+<p>  <code>{</code></p>
+<p>​    <code>printf("destoryQueue success!\n");</code></p>
+<p>`` </p>
+<p>  <code>}</code></p>
+<p>  <code>return 0;</code></p>
 <p><code>}</code></p>
 <script>
         document.querySelectorAll('.github-emoji')
@@ -570,7 +652,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://linda-gif.github.io/2020/05/30/liang-shu-fan-zhuan/">http://linda-gif.github.io/2020/05/30/liang-shu-fan-zhuan/</a>
+                    <a href="http://linda-gif.github.io/2020/06/03/xun-huan-dui-lie/">http://linda-gif.github.io/2020/06/03/xun-huan-dui-lie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -608,8 +690,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/leetcode%E5%88%B7%E9%A2%98/">
-                                    <span class="chip bg-color">leetcode刷题</span>
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+                                    <span class="chip bg-color">数据结构与算法</span>
                                 </a>
                             
                         </div>
@@ -799,9 +881,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/06/03/xun-huan-dui-lie/">
                     <div class="card-image">
@@ -825,9 +908,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-06-03
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-03
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -836,6 +919,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -854,25 +938,25 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/05/30/shunxubiao/">
+                <a href="/2020/05/30/liang-shu-fan-zhuan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="shunxubiao">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="两数反转">
                         
-                        <span class="card-title">shunxubiao</span>
+                        <span class="card-title">两数反转</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            实现代码为C语言，教材为清华大学严蔚敏版。
-#include&lt;stdio.h>
- #include&lt;stdlib.h>
- #define OK 1
- #define ERROR 0
- #define MAXSIZE 100
- t
+                            题目描述
+给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
+示例 1:
+输入: 123输出: 321 示例 2:
+输入: -123输出: -321示例 3:
+输入: 120输出: 21注意:
+假设我们的环境只能存储得
                         
                     </div>
                     <div class="publish-info">
@@ -890,8 +974,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
-                        <span class="chip bg-color">数据结构与算法</span>
+                    <a href="/tags/leetcode%E5%88%B7%E9%A2%98/">
+                        <span class="chip bg-color">leetcode刷题</span>
                     </a>
                     
                 </div>
