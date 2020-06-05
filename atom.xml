@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linda-gif.github.io/"/>
-  <updated>2020-06-03T15:20:55.109Z</updated>
+  <updated>2020-06-05T15:10:20.521Z</updated>
   <id>http://linda-gif.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>链队</title>
+    <link href="http://linda-gif.github.io/2020/06/05/lian-dui/"/>
+    <id>http://linda-gif.github.io/2020/06/05/lian-dui/</id>
+    <published>2020-06-05T15:09:03.000Z</published>
+    <updated>2020-06-05T15:10:20.521Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;参考教材为严蔚敏版，语言为C语言&lt;/p&gt;
+&lt;p&gt;直接上代码&lt;/p&gt;
+&lt;pre class=&quot; language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;
+&lt;span class=&quot;token macro property&quot;&gt;#&lt;span
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="数据结构与算法" scheme="http://linda-gif.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>循环队列</title>
