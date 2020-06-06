@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="链队, linda">
+    <meta name="keywords" content="顺序存储的多项式合并, linda">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>链队 | linda</title>
+    <title>顺序存储的多项式合并 | linda</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">链队</h1>
+                    <h1 class="description center-align post-title">顺序存储的多项式合并</h1>
                 </div>
             </div>
         </div>
@@ -447,7 +447,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-06-05
+                    2020-06-06
                 </div>
                 
 
@@ -456,7 +456,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    475
+                    431
                 </div>
                 
 
@@ -473,206 +473,131 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>参考教材为严蔚敏版，语言为C语言</p>
-<p>直接上代码</p>
-<pre class=" language-c"><code class="language-c">
-<span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">&lt;stdio.h></span></span>
-<span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">&lt;stdlib.h></span></span>
-
-
-<span class="token macro property">#<span class="token directive keyword">define</span> TRUE    1</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> FALSE   0</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> OK      1</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> ERROR   0</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> INFEASIBLE -1</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> OVERFLOW   -2</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> MAXSIZE    100</span>
-
-<span class="token keyword">typedef</span> <span class="token keyword">int</span> QElemType<span class="token punctuation">;</span>
-<span class="token keyword">typedef</span> <span class="token keyword">int</span> Status<span class="token punctuation">;</span>
-
-<span class="token keyword">typedef</span> <span class="token keyword">struct</span> Qnode<span class="token punctuation">{</span>
-    QElemType data<span class="token punctuation">;</span>
-    <span class="token keyword">struct</span> Qnode <span class="token operator">*</span>next<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//数据域</span>
-<span class="token punctuation">}</span>QNode<span class="token punctuation">,</span><span class="token operator">*</span>QueuePtr<span class="token punctuation">;</span>
-
-<span class="token keyword">typedef</span> <span class="token keyword">struct</span><span class="token punctuation">{</span>
-    QueuePtr front<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//头指针</span>
-    QueuePtr rear<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//尾指针</span>
-<span class="token punctuation">}</span>LinkQueue<span class="token punctuation">;</span>
-
-Status <span class="token function">InitQueue</span><span class="token punctuation">(</span>LinkQueue <span class="token operator">&amp;</span>Q<span class="token punctuation">)</span>
+                <p>采用顺序存储的方式，实现语言为c++</p>
+<pre class=" language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdlib></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span>  polynomial
 <span class="token punctuation">{</span>
-    Q<span class="token punctuation">.</span>front<span class="token operator">=</span>Q<span class="token punctuation">.</span>rear<span class="token operator">=</span><span class="token punctuation">(</span>QueuePtr<span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>Qnode<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>Q<span class="token punctuation">.</span>front<span class="token punctuation">)</span>
-    <span class="token function">exit</span><span class="token punctuation">(</span>OVERFLOW<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    Q<span class="token punctuation">.</span>front<span class="token operator">-></span>next<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-Status <span class="token function">DestoryQueue</span><span class="token punctuation">(</span>LinkQueue <span class="token operator">&amp;</span>Q<span class="token punctuation">)</span>
+    <span class="token keyword">int</span> factor<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//系数</span>
+    <span class="token keyword">int</span> indice<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//指数</span>
+    <span class="token keyword">struct</span> polynomial <span class="token operator">*</span>next<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>polynomial<span class="token punctuation">,</span><span class="token operator">*</span>LinkList<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//尾插法--带头结点</span>
+<span class="token keyword">void</span> <span class="token function">CreateLink</span><span class="token punctuation">(</span>LinkList <span class="token operator">&amp;</span>L<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    QNode <span class="token operator">*</span>p<span class="token punctuation">;</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>front<span class="token punctuation">)</span>
-   <span class="token punctuation">{</span>
-
-    p<span class="token operator">=</span>Q<span class="token punctuation">.</span>front<span class="token operator">-></span>next<span class="token punctuation">;</span>
-    delete Q<span class="token punctuation">.</span>front<span class="token punctuation">;</span>
-    Q<span class="token punctuation">.</span>front<span class="token operator">=</span>p<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
-
-<span class="token punctuation">}</span>
-
-Status <span class="token function">EnQueue</span><span class="token punctuation">(</span>LinkQueue <span class="token operator">&amp;</span>Q<span class="token punctuation">,</span>QElemType e<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    QNode <span class="token operator">*</span>p<span class="token punctuation">;</span>
-    p<span class="token operator">=</span><span class="token punctuation">(</span>QueuePtr<span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>Qnode<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>p<span class="token punctuation">)</span>
-    <span class="token function">exit</span><span class="token punctuation">(</span>OVERFLOW<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    p<span class="token operator">-></span>data<span class="token operator">=</span>e<span class="token punctuation">;</span>
-    p<span class="token operator">-></span>next<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-    Q<span class="token punctuation">.</span>rear<span class="token operator">-></span>next<span class="token operator">=</span>p<span class="token punctuation">;</span>
-    Q<span class="token punctuation">.</span>rear<span class="token operator">=</span>p<span class="token punctuation">;</span>
-    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
-
-<span class="token punctuation">}</span>
-
-<span class="token comment" spellcheck="true">//元素e出队</span>
-Status <span class="token function">DeQueue</span><span class="token punctuation">(</span>LinkQueue <span class="token operator">&amp;</span>Q<span class="token punctuation">,</span>QElemType <span class="token operator">&amp;</span>e<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    QNode <span class="token operator">*</span>p<span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>front<span class="token operator">==</span>Q<span class="token punctuation">.</span>rear<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
-    p<span class="token operator">=</span>Q<span class="token punctuation">.</span>front<span class="token operator">-></span>next<span class="token punctuation">;</span>
-    e<span class="token operator">=</span>p<span class="token operator">-></span>data<span class="token punctuation">;</span>
-    Q<span class="token punctuation">.</span>front<span class="token operator">-></span>next<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>rear<span class="token operator">==</span>p<span class="token punctuation">)</span>
-    Q<span class="token punctuation">.</span>rear<span class="token operator">=</span>Q<span class="token punctuation">.</span>front<span class="token punctuation">;</span>
-    delete p<span class="token punctuation">;</span>
-    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
-
-
-<span class="token punctuation">}</span>
-
-<span class="token comment" spellcheck="true">//链队的队头元素</span>
-Status <span class="token function">Gethead</span><span class="token punctuation">(</span>LinkQueue Q<span class="token punctuation">,</span>QElemType <span class="token operator">&amp;</span>e<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>front<span class="token operator">==</span>Q<span class="token punctuation">.</span>rear<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
-    e<span class="token operator">=</span>Q<span class="token punctuation">.</span>front<span class="token operator">-></span>next<span class="token operator">-></span>data<span class="token punctuation">;</span>
-    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
-
-<span class="token punctuation">}</span>
-
-<span class="token keyword">int</span> <span class="token function">QueueLength</span><span class="token punctuation">(</span>LinkQueue Q<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>front<span class="token operator">==</span>Q<span class="token punctuation">.</span>rear<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
-    QNode <span class="token operator">*</span>p<span class="token punctuation">;</span>
-    p<span class="token operator">=</span>Q<span class="token punctuation">.</span>front<span class="token operator">-></span>next<span class="token punctuation">;</span>
-    <span class="token keyword">int</span> length<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span>
+    LinkList p<span class="token punctuation">,</span>s<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> i<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// L = (LinkList)malloc(sizeof(polynomial));</span>
+    L<span class="token operator">=</span><span class="token keyword">new</span> polynomial<span class="token punctuation">;</span>
+    L<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    p <span class="token operator">=</span> L<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
-        length<span class="token operator">++</span><span class="token punctuation">;</span>
-        p<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// s = (LinkList)malloc(sizeof(polynomial));</span>
+        s<span class="token operator">=</span><span class="token keyword">new</span> polynomial<span class="token punctuation">;</span>
+        cout<span class="token operator">&lt;&lt;</span><span class="token string">"enter the polynomial expo and coef in turn:"</span><span class="token punctuation">;</span>
+        cin<span class="token operator">>></span>s<span class="token operator">-</span><span class="token operator">></span>factor<span class="token operator">>></span>s<span class="token operator">-</span><span class="token operator">></span>indice<span class="token punctuation">;</span>
+        s<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+        p<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> s<span class="token punctuation">;</span>
+        p <span class="token operator">=</span> s<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> length<span class="token punctuation">;</span>
-
-
 <span class="token punctuation">}</span>
 
-<span class="token comment" spellcheck="true">//遍历链表</span>
-Status <span class="token function">TraverseQueue</span><span class="token punctuation">(</span>LinkQueue Q<span class="token punctuation">)</span>
+<span class="token keyword">void</span> <span class="token function">AddList</span><span class="token punctuation">(</span>LinkList List1<span class="token punctuation">,</span> LinkList List2<span class="token punctuation">,</span> LinkList <span class="token operator">&amp;</span>L<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>front<span class="token operator">==</span>Q<span class="token punctuation">.</span>rear<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
-    QNode <span class="token operator">*</span>p<span class="token punctuation">;</span>
-    p<span class="token operator">=</span>Q<span class="token punctuation">.</span>front<span class="token operator">-></span>next<span class="token punctuation">;</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span>
+    LinkList p1<span class="token punctuation">,</span>p2<span class="token punctuation">,</span>list<span class="token punctuation">,</span>s<span class="token punctuation">;</span>
+    L <span class="token operator">=</span> <span class="token punctuation">(</span>LinkList<span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>polynomial<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    L<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    list <span class="token operator">=</span> L<span class="token punctuation">;</span>
+    p1 <span class="token operator">=</span> List1<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+    p2 <span class="token operator">=</span> List2<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>p1 <span class="token operator">&amp;&amp;</span> p2<span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d "</span><span class="token punctuation">,</span>p<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        p<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>p1<span class="token operator">-</span><span class="token operator">></span>indice <span class="token operator">&lt;</span> p2<span class="token operator">-</span><span class="token operator">></span>indice<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            s <span class="token operator">=</span> p1<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//s存的是最初的p1</span>
+            list<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> p1<span class="token punctuation">;</span>
+            list <span class="token operator">=</span> p1<span class="token punctuation">;</span>
+            list<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+            p1 <span class="token operator">=</span> s<span class="token punctuation">;</span>
 
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>p1<span class="token operator">-</span><span class="token operator">></span>indice <span class="token operator">==</span> p2<span class="token operator">-</span><span class="token operator">></span>indice<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            p1<span class="token operator">-</span><span class="token operator">></span>factor <span class="token operator">=</span> p1<span class="token operator">-</span><span class="token operator">></span>factor <span class="token operator">+</span> p2<span class="token operator">-</span><span class="token operator">></span>factor<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>p1<span class="token operator">-</span><span class="token operator">></span>factor <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//系数和不为0</span>
+            <span class="token punctuation">{</span>
+                s<span class="token operator">=</span>p1<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+                list<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> p1<span class="token punctuation">;</span>
+
+                list <span class="token operator">=</span> p1<span class="token punctuation">;</span>
+                list<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+                p1 <span class="token operator">=</span> s<span class="token punctuation">;</span>
+                p2 <span class="token operator">=</span> p2<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> 
+            <span class="token keyword">else</span> <span class="token comment" spellcheck="true">//系数和为0</span>
+            <span class="token punctuation">{</span>
+                p1 <span class="token operator">=</span> p1<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+                p2 <span class="token operator">=</span> p2<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            s <span class="token operator">=</span> p2<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+            list<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> p2<span class="token punctuation">;</span>
+            list <span class="token operator">=</span> p2<span class="token punctuation">;</span>
+            list<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+            p2 <span class="token operator">=</span> s<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>p1 <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> list<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> p1<span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>p2 <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> list<span class="token operator">-</span><span class="token operator">></span>next <span class="token operator">=</span> p2<span class="token punctuation">;</span>
 
 <span class="token punctuation">}</span>
 
-<span class="token comment" spellcheck="true">//清空链队</span>
-Status <span class="token function">clearQueue</span><span class="token punctuation">(</span>LinkQueue <span class="token operator">&amp;</span>Q<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">//输出结果</span>
+<span class="token keyword">void</span> <span class="token function">VisitList</span><span class="token punctuation">(</span>LinkList L<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    QNode <span class="token operator">*</span>p<span class="token punctuation">,</span><span class="token operator">*</span>q<span class="token punctuation">;</span>
-    p<span class="token operator">=</span>Q<span class="token punctuation">.</span>front<span class="token operator">-></span>next<span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>front<span class="token operator">=</span>Q<span class="token punctuation">.</span>rear<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span>
+    LinkList p<span class="token punctuation">;</span>
+    p <span class="token operator">=</span> L<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>p<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
     <span class="token punctuation">{</span>
-        q<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>
-        delete p<span class="token punctuation">;</span>
-        p<span class="token operator">=</span>q<span class="token punctuation">;</span>
+        cout<span class="token operator">&lt;&lt;</span><span class="token string">"0"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-    Q<span class="token punctuation">.</span>front<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-    Q<span class="token punctuation">.</span>rear<span class="token operator">=</span>Q<span class="token punctuation">.</span>front<span class="token punctuation">;</span>
-    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
-
-
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>p<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        cout<span class="token operator">&lt;&lt;</span>p<span class="token operator">-</span><span class="token operator">></span>factor<span class="token operator">&lt;&lt;</span><span class="token string">"X^"</span><span class="token operator">&lt;&lt;</span>p<span class="token operator">-</span><span class="token operator">></span>indice<span class="token punctuation">;</span>
+        p <span class="token operator">=</span> p<span class="token operator">-</span><span class="token operator">></span>next<span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>p <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+            cout<span class="token operator">&lt;&lt;</span><span class="token string">"+"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    cout<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    LinkQueue Q<span class="token punctuation">;</span>
-    QElemType e<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-
-
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">InitQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">)</span><span class="token punctuation">)</span>
-     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Initstack success\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token comment" spellcheck="true">//执行入栈操作</span>
-    e<span class="token operator">=</span><span class="token number">11</span><span class="token punctuation">;</span>
-    <span class="token function">EnQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    e<span class="token operator">=</span><span class="token number">22</span><span class="token punctuation">;</span>
-    <span class="token function">EnQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    e<span class="token operator">=</span><span class="token number">33</span><span class="token punctuation">;</span>
-    <span class="token function">EnQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-
-     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the length of the queue is %d\n"</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token function">QueueLength</span><span class="token punctuation">(</span>Q<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">Gethead</span><span class="token punctuation">(</span>Q<span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-         <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the Gethead element is %d\n"</span><span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">DeQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-      <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the delete of the element is %d\n"</span><span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-
-    <span class="token punctuation">}</span>
-
-    <span class="token function">TraverseQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-
-
-
-   <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">clearQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">)</span><span class="token punctuation">)</span>  
-   <span class="token punctuation">{</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"clear success!\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-   <span class="token punctuation">}</span>
-
-
-
-   <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">DestoryQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">)</span><span class="token punctuation">)</span>
-   <span class="token punctuation">{</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"destoryQueue success!\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-   <span class="token punctuation">}</span>
-   <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-
+    LinkList p<span class="token punctuation">,</span>q<span class="token punctuation">,</span>L<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">,</span>m<span class="token punctuation">;</span>
+    cout<span class="token operator">&lt;&lt;</span><span class="token string">"please enter the number of nodes of the first polynomial:"</span><span class="token punctuation">;</span> 
+    cin<span class="token operator">>></span>n<span class="token punctuation">;</span>
+    <span class="token function">CreateLink</span><span class="token punctuation">(</span>p<span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cout<span class="token operator">&lt;&lt;</span><span class="token string">"enter the first polynomial:"</span><span class="token punctuation">;</span>
+    <span class="token function">VisitList</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cout<span class="token operator">&lt;&lt;</span><span class="token string">"please enter the number of nodes of the second polynomial:"</span><span class="token punctuation">;</span>
+    cin<span class="token operator">>></span>m<span class="token punctuation">;</span>
+    <span class="token function">CreateLink</span><span class="token punctuation">(</span>q<span class="token punctuation">,</span>m<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cout<span class="token operator">&lt;&lt;</span><span class="token string">"enter the second polynomial:"</span><span class="token punctuation">;</span>
+    <span class="token function">VisitList</span><span class="token punctuation">(</span>q<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">AddList</span><span class="token punctuation">(</span>p<span class="token punctuation">,</span>q<span class="token punctuation">,</span>L<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cout<span class="token operator">&lt;&lt;</span><span class="token string">"the output is summed: "</span><span class="token punctuation">;</span> 
+    <span class="token function">VisitList</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<pre><code></code></pre><script>
+<p><img src="https://img-blog.csdnimg.cn/2020060622385182.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzIzMDk0,size_16,color_FFFFFF,t_70" alt="运行代码"></p>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -715,7 +640,7 @@ Status <span class="token function">clearQueue</span><span class="token punctuat
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://linda-gif.github.io/2020/06/05/lian-dui/">http://linda-gif.github.io/2020/06/05/lian-dui/</a>
+                    <a href="http://linda-gif.github.io/2020/06/06/shun-xu-cun-chu-de-duo-xiang-shi-he-bing/">http://linda-gif.github.io/2020/06/06/shun-xu-cun-chu-de-duo-xiang-shi-he-bing/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -948,25 +873,26 @@ Status <span class="token function">clearQueue</span><span class="token punctuat
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/06/06/dan-lian-biao-de-shi-xian/">
+                <a href="/2020/06/06/shun-xu-zhan-de-shi-xian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="单链表的实现">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="顺序栈的实现">
                         
-                        <span class="card-title">单链表的实现</span>
+                        <span class="card-title">顺序栈的实现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            #include&lt;stdio.h>
+                            直接上代码
+#include&lt;stdio.h>
 #include&lt;stdlib.h>
-#define OK 1
-#define ERROR 0
-#define F -1
-typedef int ElemType;
-typedef int S
+#define true 1
+#define false 0
+#define overFlow -2
+#define MAXSIZE 100
+
                         
                     </div>
                     <div class="publish-info">
@@ -999,32 +925,30 @@ typedef int S
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/06/03/xun-huan-dui-lie/">
+                <a href="/2020/06/06/shun-xu-biao-de-you-xu-he-bing/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="循环队列">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="顺序表的有序合并">
                         
-                        <span class="card-title">循环队列</span>
+                        <span class="card-title">顺序表的有序合并</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            直接上代码实现语言为C语言
+                            直接上代码
 #include&lt;stdio.h>
-#include&lt;stdlib.h>
-
-
-#define TRUE    1
-#define FALSE   0
-#define OK      1
-#define
+ #include&lt;stdlib.h>
+ #define OK 1
+ #define ERROR 0
+ #define MAXSIZE 100
+ typedef int Statu
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-06
                             </span>
                         <span class="publish-author">
                             

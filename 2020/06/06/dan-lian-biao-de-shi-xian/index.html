@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="链队, linda">
+    <meta name="keywords" content="单链表的实现, linda">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>链队 | linda</title>
+    <title>单链表的实现 | linda</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">链队</h1>
+                    <h1 class="description center-align post-title">单链表的实现</h1>
                 </div>
             </div>
         </div>
@@ -447,7 +447,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-06-05
+                    2020-06-06
                 </div>
                 
 
@@ -456,14 +456,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    475
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    6 分
                 </div>
                 
 
@@ -473,206 +473,274 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>参考教材为严蔚敏版，语言为C语言</p>
-<p>直接上代码</p>
-<pre class=" language-c"><code class="language-c">
-<span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">&lt;stdio.h></span></span>
+                <pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">&lt;stdio.h></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">&lt;stdlib.h></span></span>
-
-
-<span class="token macro property">#<span class="token directive keyword">define</span> TRUE    1</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> FALSE   0</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> OK      1</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> ERROR   0</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> INFEASIBLE -1</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> OVERFLOW   -2</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> MAXSIZE    100</span>
-
-<span class="token keyword">typedef</span> <span class="token keyword">int</span> QElemType<span class="token punctuation">;</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> OK 1</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> ERROR 0</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> F -1</span>
+<span class="token keyword">typedef</span> <span class="token keyword">int</span> ElemType<span class="token punctuation">;</span>
 <span class="token keyword">typedef</span> <span class="token keyword">int</span> Status<span class="token punctuation">;</span>
-
-<span class="token keyword">typedef</span> <span class="token keyword">struct</span> Qnode<span class="token punctuation">{</span>
-    QElemType data<span class="token punctuation">;</span>
-    <span class="token keyword">struct</span> Qnode <span class="token operator">*</span>next<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//数据域</span>
-<span class="token punctuation">}</span>QNode<span class="token punctuation">,</span><span class="token operator">*</span>QueuePtr<span class="token punctuation">;</span>
-
-<span class="token keyword">typedef</span> <span class="token keyword">struct</span><span class="token punctuation">{</span>
-    QueuePtr front<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//头指针</span>
-    QueuePtr rear<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//尾指针</span>
-<span class="token punctuation">}</span>LinkQueue<span class="token punctuation">;</span>
-
-Status <span class="token function">InitQueue</span><span class="token punctuation">(</span>LinkQueue <span class="token operator">&amp;</span>Q<span class="token punctuation">)</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> Lnode<span class="token comment" spellcheck="true">//单链表的定义</span>
 <span class="token punctuation">{</span>
-    Q<span class="token punctuation">.</span>front<span class="token operator">=</span>Q<span class="token punctuation">.</span>rear<span class="token operator">=</span><span class="token punctuation">(</span>QueuePtr<span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>Qnode<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>Q<span class="token punctuation">.</span>front<span class="token punctuation">)</span>
-    <span class="token function">exit</span><span class="token punctuation">(</span>OVERFLOW<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    Q<span class="token punctuation">.</span>front<span class="token operator">-></span>next<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
+    ElemType data<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//数据域</span>
+    <span class="token keyword">struct</span> Lnode <span class="token operator">*</span>next<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//指针域</span>
+
+<span class="token punctuation">}</span>Lnode<span class="token punctuation">,</span><span class="token operator">*</span>linkList<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//linklist为指向结构体Lode的指针类型</span>
+
+linkList L<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//定义链表L</span>
+
+<span class="token comment" spellcheck="true">//初始化链表</span>
+Status <span class="token function">InitList</span><span class="token punctuation">(</span>linkList <span class="token operator">&amp;</span>L<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//要改变链表的形状，所以用引用类型</span>
+<span class="token punctuation">{</span>
+    L<span class="token operator">=</span>new Lnode<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//生成一个新结点,用头指针指向头结点</span>
+    L<span class="token operator">-></span>next<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//将新结点的指针域置空</span>
     <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-Status <span class="token function">DestoryQueue</span><span class="token punctuation">(</span>LinkQueue <span class="token operator">&amp;</span>Q<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//判断链表为空</span>
+<span class="token keyword">int</span> <span class="token function">ListEmpty</span><span class="token punctuation">(</span>linkList L<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    QNode <span class="token operator">*</span>p<span class="token punctuation">;</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>front<span class="token punctuation">)</span>
-   <span class="token punctuation">{</span>
-
-    p<span class="token operator">=</span>Q<span class="token punctuation">.</span>front<span class="token operator">-></span>next<span class="token punctuation">;</span>
-    delete Q<span class="token punctuation">.</span>front<span class="token punctuation">;</span>
-    Q<span class="token punctuation">.</span>front<span class="token operator">=</span>p<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
-
+    <span class="token keyword">if</span><span class="token punctuation">(</span>L<span class="token operator">-></span>next<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//非空，则不是空链表，返回ERROR</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span> <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-Status <span class="token function">EnQueue</span><span class="token punctuation">(</span>LinkQueue <span class="token operator">&amp;</span>Q<span class="token punctuation">,</span>QElemType e<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//销毁单链表</span>
+<span class="token keyword">int</span> <span class="token function">DestoryList</span><span class="token punctuation">(</span>linkList <span class="token operator">&amp;</span>L<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    QNode <span class="token operator">*</span>p<span class="token punctuation">;</span>
-    p<span class="token operator">=</span><span class="token punctuation">(</span>QueuePtr<span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>Qnode<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>p<span class="token punctuation">)</span>
-    <span class="token function">exit</span><span class="token punctuation">(</span>OVERFLOW<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    p<span class="token operator">-></span>data<span class="token operator">=</span>e<span class="token punctuation">;</span>
-    p<span class="token operator">-></span>next<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-    Q<span class="token punctuation">.</span>rear<span class="token operator">-></span>next<span class="token operator">=</span>p<span class="token punctuation">;</span>
-    Q<span class="token punctuation">.</span>rear<span class="token operator">=</span>p<span class="token punctuation">;</span>
-    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
-
-<span class="token punctuation">}</span>
-
-<span class="token comment" spellcheck="true">//元素e出队</span>
-Status <span class="token function">DeQueue</span><span class="token punctuation">(</span>LinkQueue <span class="token operator">&amp;</span>Q<span class="token punctuation">,</span>QElemType <span class="token operator">&amp;</span>e<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    QNode <span class="token operator">*</span>p<span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>front<span class="token operator">==</span>Q<span class="token punctuation">.</span>rear<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
-    p<span class="token operator">=</span>Q<span class="token punctuation">.</span>front<span class="token operator">-></span>next<span class="token punctuation">;</span>
-    e<span class="token operator">=</span>p<span class="token operator">-></span>data<span class="token punctuation">;</span>
-    Q<span class="token punctuation">.</span>front<span class="token operator">-></span>next<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>rear<span class="token operator">==</span>p<span class="token punctuation">)</span>
-    Q<span class="token punctuation">.</span>rear<span class="token operator">=</span>Q<span class="token punctuation">.</span>front<span class="token punctuation">;</span>
-    delete p<span class="token punctuation">;</span>
-    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
-
-
-<span class="token punctuation">}</span>
-
-<span class="token comment" spellcheck="true">//链队的队头元素</span>
-Status <span class="token function">Gethead</span><span class="token punctuation">(</span>LinkQueue Q<span class="token punctuation">,</span>QElemType <span class="token operator">&amp;</span>e<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>front<span class="token operator">==</span>Q<span class="token punctuation">.</span>rear<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
-    e<span class="token operator">=</span>Q<span class="token punctuation">.</span>front<span class="token operator">-></span>next<span class="token operator">-></span>data<span class="token punctuation">;</span>
-    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
-
-<span class="token punctuation">}</span>
-
-<span class="token keyword">int</span> <span class="token function">QueueLength</span><span class="token punctuation">(</span>LinkQueue Q<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>front<span class="token operator">==</span>Q<span class="token punctuation">.</span>rear<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
-    QNode <span class="token operator">*</span>p<span class="token punctuation">;</span>
-    p<span class="token operator">=</span>Q<span class="token punctuation">.</span>front<span class="token operator">-></span>next<span class="token punctuation">;</span>
-    <span class="token keyword">int</span> length<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span>
+    Lnode <span class="token operator">*</span>p<span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//当链表不为空时，一直释放结点</span>
     <span class="token punctuation">{</span>
-        length<span class="token operator">++</span><span class="token punctuation">;</span>
-        p<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        p<span class="token operator">=</span>L<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//将p指向头结点，而头指针存放头结点的地址</span>
+        L<span class="token operator">=</span>L<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        delete p<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> length<span class="token punctuation">;</span>
-
-
+    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span class="token comment" spellcheck="true">//遍历链表</span>
-Status <span class="token function">TraverseQueue</span><span class="token punctuation">(</span>LinkQueue Q<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>front<span class="token operator">==</span>Q<span class="token punctuation">.</span>rear<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
-    QNode <span class="token operator">*</span>p<span class="token punctuation">;</span>
-    p<span class="token operator">=</span>Q<span class="token punctuation">.</span>front<span class="token operator">-></span>next<span class="token punctuation">;</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d "</span><span class="token punctuation">,</span>p<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        p<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-
-<span class="token punctuation">}</span>
-
-<span class="token comment" spellcheck="true">//清空链队</span>
-Status <span class="token function">clearQueue</span><span class="token punctuation">(</span>LinkQueue <span class="token operator">&amp;</span>Q<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    QNode <span class="token operator">*</span>p<span class="token punctuation">,</span><span class="token operator">*</span>q<span class="token punctuation">;</span>
-    p<span class="token operator">=</span>Q<span class="token punctuation">.</span>front<span class="token operator">-></span>next<span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>Q<span class="token punctuation">.</span>front<span class="token operator">=</span>Q<span class="token punctuation">.</span>rear<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//清空链表</span>
+<span class="token comment" spellcheck="true">//链表仍存在，但链表中无元素，成为空链表（头指针和头结点依旧在）</span>
+<span class="token comment" spellcheck="true">//算法思路</span>
+<span class="token comment" spellcheck="true">//依次释放所有结点，并将头指针结点置为空</span>
+Status <span class="token function">clearList</span><span class="token punctuation">(</span>linkList <span class="token operator">&amp;</span>L<span class="token punctuation">)</span>
+<span class="token punctuation">{</span> 
+    linkList p<span class="token punctuation">,</span>q<span class="token punctuation">;</span>
+    p<span class="token operator">=</span>L<span class="token operator">-></span>next<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//使p指向首元结点 </span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//当p指向的结点为NULL时，结束循环 </span>
     <span class="token punctuation">{</span>
         q<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>
         delete p<span class="token punctuation">;</span>
         p<span class="token operator">=</span>q<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-    Q<span class="token punctuation">.</span>front<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-    Q<span class="token punctuation">.</span>rear<span class="token operator">=</span>Q<span class="token punctuation">.</span>front<span class="token punctuation">;</span>
+    L<span class="token operator">-></span>next<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span> 
     <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token comment" spellcheck="true">//返回单链表的长度</span>
+<span class="token keyword">int</span> <span class="token function">ListLength</span><span class="token punctuation">(</span>linkList L<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//返回L中数据元素的个数</span>
+<span class="token punctuation">{</span>
+    Lnode <span class="token operator">*</span>p<span class="token punctuation">;</span>
+    p<span class="token operator">=</span>L<span class="token operator">-></span>next<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//p指向首元结点</span>
+    <span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//当p为空时，循环结束</span>
+    <span class="token punctuation">{</span>
+        i<span class="token operator">++</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//记录结点的个数</span>
+        p<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//指向下一个结点</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> i<span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//取单链表第i个元素的内容</span>
+<span class="token keyword">int</span> <span class="token function">GetElem</span><span class="token punctuation">(</span>linkList L<span class="token punctuation">,</span><span class="token keyword">int</span> i<span class="token punctuation">,</span>ElemType <span class="token operator">&amp;</span>e<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Lnode <span class="token operator">*</span>p<span class="token punctuation">;</span>
+    p<span class="token operator">=</span>L<span class="token operator">-></span>next<span class="token punctuation">;</span> <span class="token keyword">int</span> j<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//初始化</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token operator">&amp;&amp;</span>j<span class="token operator">&lt;</span>i<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        p<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        j<span class="token operator">++</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>p<span class="token operator">&amp;&amp;</span>j<span class="token operator">></span>i<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//j>i,i的值可能是负数或者是0，j>i用来判断i的值是否具有有效性</span>
+    <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
+    e<span class="token operator">=</span>p<span class="token operator">-></span>data<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//按值查找，根据指定数据的值查找它的位置信号</span>
+<span class="token keyword">int</span> <span class="token function">LocateElem</span><span class="token punctuation">(</span>linkList L<span class="token punctuation">,</span>ElemType e<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Lnode <span class="token operator">*</span>p<span class="token punctuation">;</span>
+    p<span class="token operator">=</span>L<span class="token operator">-></span>next<span class="token punctuation">;</span><span class="token keyword">int</span> j<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token operator">&amp;&amp;</span>p<span class="token operator">-></span>data<span class="token operator">!=</span>e<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        p<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        j<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> j<span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+    <span class="token keyword">return</span> F<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//插入，在第i个结点，插入值为e的结点</span>
+<span class="token comment" spellcheck="true">//算法思路</span>
+<span class="token comment" spellcheck="true">//首先找到i-1的存储位置p</span>
+<span class="token comment" spellcheck="true">//生成一个数据域为e的新结点s</span>
+<span class="token comment" spellcheck="true">//插入新结点，新节点的指针域指向i,结点i-1的指针域指向新节点</span>
+Status <span class="token function">ListInsert</span><span class="token punctuation">(</span>linkList <span class="token operator">&amp;</span>L<span class="token punctuation">,</span><span class="token keyword">int</span> i<span class="token punctuation">,</span>ElemType e<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Lnode <span class="token operator">*</span>p<span class="token punctuation">,</span><span class="token operator">*</span>s<span class="token punctuation">;</span>
+    p<span class="token operator">=</span>L<span class="token punctuation">;</span><span class="token keyword">int</span> j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token operator">&amp;&amp;</span>j<span class="token operator">&lt;</span>i<span class="token number">-1</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//寻找第i-1个结点，p指向第i-1个结点</span>
+    <span class="token punctuation">{</span>
+        p<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        j<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>p<span class="token operator">||</span>j<span class="token operator">></span>i<span class="token number">-1</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//i大于表长+1或者小于1，插入位置非法</span>
+    <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
+    s<span class="token operator">=</span>new Lnode<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//生成新结点</span>
+    s<span class="token operator">-></span>data<span class="token operator">=</span>e<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//将结点s的数据与置为e</span>
+    s<span class="token operator">-></span>next<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    p<span class="token operator">-></span>next<span class="token operator">=</span>s<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//单链表的删除，删除第i个结点</span>
+Status <span class="token function">ListDelete</span><span class="token punctuation">(</span>linkList <span class="token operator">&amp;</span>L<span class="token punctuation">,</span><span class="token keyword">int</span> i<span class="token punctuation">,</span>ElemType <span class="token operator">&amp;</span>e<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Lnode <span class="token operator">*</span>p<span class="token punctuation">,</span><span class="token operator">*</span>q<span class="token punctuation">;</span>
+    p<span class="token operator">=</span>L<span class="token punctuation">;</span> <span class="token keyword">int</span> j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//初始化</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>p<span class="token operator">-></span>next<span class="token operator">&amp;&amp;</span>j<span class="token operator">&lt;</span>i<span class="token number">-1</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//可以找到第i-1的数据元素，p指向i-1,p->next指向i,即i必须存在</span>
+   <span class="token punctuation">{</span>
+       p<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span>
+       j<span class="token operator">++</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+   <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>p<span class="token operator">-></span>next<span class="token punctuation">)</span><span class="token operator">||</span>j<span class="token operator">></span>i<span class="token number">-1</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//删除位置不合理</span>
+   <span class="token keyword">return</span> ERROR<span class="token punctuation">;</span>
+   q<span class="token operator">=</span>p<span class="token operator">-></span>next<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//临时保存被删节点的地址以备释放</span>
+   p<span class="token operator">-></span>next<span class="token operator">=</span>q<span class="token operator">-></span>next<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//改变删除结点前驱结点的指针域</span>
+   e<span class="token operator">=</span>q<span class="token operator">-></span>data<span class="token punctuation">;</span>
+   delete p<span class="token punctuation">;</span>
+   <span class="token keyword">return</span> OK<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//尾插法</span>
+<span class="token keyword">int</span> <span class="token function">CreateList</span><span class="token punctuation">(</span>linkList <span class="token operator">&amp;</span>L<span class="token punctuation">,</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    L<span class="token operator">=</span>new Lnode<span class="token punctuation">;</span>
+    L<span class="token operator">-></span>next<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
+    Lnode <span class="token operator">*</span>p<span class="token punctuation">,</span><span class="token operator">*</span>r<span class="token punctuation">;</span>
+    r<span class="token operator">=</span>L<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//尾指针指向头结点</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>n<span class="token punctuation">;</span><span class="token operator">++</span>i<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        p<span class="token operator">=</span>new Lnode<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//生成新结点</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>p<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//输入元素的值</span>
+        p<span class="token operator">-></span>next<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
+        r<span class="token operator">-></span>next<span class="token operator">=</span>p<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//将结点插入到表尾</span>
+        r<span class="token operator">=</span>p<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//r指向新的尾结点</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> true<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//主函数测试</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    ElemType e<span class="token punctuation">;</span><span class="token keyword">int</span> n<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//测试InitList函数</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">InitList</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"InitList success!\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"InitList error\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+   <span class="token comment" spellcheck="true">//测试listEmpty函数</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">ListEmpty</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"ListEmpty success!\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"ListEmpty error\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//测试Creatlist函数</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"please enter the number:\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">CreateList</span><span class="token punctuation">(</span>L<span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Createlist success\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//测试listlength函数</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Linklist length is %d\n"</span><span class="token punctuation">,</span><span class="token function">ListLength</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+    <span class="token comment" spellcheck="true">//测试Getelem函数</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">GetElem</span><span class="token punctuation">(</span>L<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the first element is %d\n"</span><span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the first element is not exist\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//测试locateElem_L函数</span>
+    <span class="token keyword">int</span> a2<span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"please enter the number of you want to find it,if success,return a position sequence for the element\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>a2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> f<span class="token operator">=</span><span class="token function">LocateElem</span><span class="token punctuation">(</span>L<span class="token punctuation">,</span>a2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d is located at the %d\n"</span><span class="token punctuation">,</span>a2<span class="token punctuation">,</span>f<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d is not located at the Linklist\n"</span><span class="token punctuation">,</span>a2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//测试listInsert函数</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"please enter the insertion element position sequence number and the value of the number\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> c<span class="token punctuation">,</span>a<span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d %d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>c<span class="token punctuation">,</span><span class="token operator">&amp;</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">ListInsert</span><span class="token punctuation">(</span>L<span class="token punctuation">,</span>c<span class="token punctuation">,</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"listInsert success!\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//测试listDelete函数</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"please enter the location number of the element you want to delete\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> d<span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">ListDelete</span><span class="token punctuation">(</span>L<span class="token punctuation">,</span>d<span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">" the deleted element is %d\n"</span><span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Delete error\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//测试clearlist函数</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">clearList</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"clearList success\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"clearlist error\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//测试DestoryList函数</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">DestoryList</span><span class="token punctuation">(</span>L<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"DestoryList success\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Destorylist error\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+
+
+
+
+
+
 
 
 <span class="token punctuation">}</span>
 
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    LinkQueue Q<span class="token punctuation">;</span>
-    QElemType e<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
 
-
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">InitQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">)</span><span class="token punctuation">)</span>
-     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Initstack success\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token comment" spellcheck="true">//执行入栈操作</span>
-    e<span class="token operator">=</span><span class="token number">11</span><span class="token punctuation">;</span>
-    <span class="token function">EnQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    e<span class="token operator">=</span><span class="token number">22</span><span class="token punctuation">;</span>
-    <span class="token function">EnQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    e<span class="token operator">=</span><span class="token number">33</span><span class="token punctuation">;</span>
-    <span class="token function">EnQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-
-     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the length of the queue is %d\n"</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token function">QueueLength</span><span class="token punctuation">(</span>Q<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">Gethead</span><span class="token punctuation">(</span>Q<span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-         <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the Gethead element is %d\n"</span><span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">DeQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-      <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the delete of the element is %d\n"</span><span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-
-    <span class="token punctuation">}</span>
-
-    <span class="token function">TraverseQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-
-
-
-   <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">clearQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">)</span><span class="token punctuation">)</span>  
-   <span class="token punctuation">{</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"clear success!\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-   <span class="token punctuation">}</span>
-
-
-
-   <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">DestoryQueue</span><span class="token punctuation">(</span>Q<span class="token punctuation">)</span><span class="token punctuation">)</span>
-   <span class="token punctuation">{</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"destoryQueue success!\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-   <span class="token punctuation">}</span>
-   <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-
-<span class="token punctuation">}</span></code></pre>
-<pre><code></code></pre><script>
+</code></pre>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -715,7 +783,7 @@ Status <span class="token function">clearQueue</span><span class="token punctuat
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://linda-gif.github.io/2020/06/05/lian-dui/">http://linda-gif.github.io/2020/06/05/lian-dui/</a>
+                    <a href="http://linda-gif.github.io/2020/06/06/dan-lian-biao-de-shi-xian/">http://linda-gif.github.io/2020/06/06/dan-lian-biao-de-shi-xian/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -948,25 +1016,25 @@ Status <span class="token function">clearQueue</span><span class="token punctuat
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/06/06/dan-lian-biao-de-shi-xian/">
+                <a href="/2020/06/06/shun-xu-biao-de-you-xu-he-bing/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="单链表的实现">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="顺序表的有序合并">
                         
-                        <span class="card-title">单链表的实现</span>
+                        <span class="card-title">顺序表的有序合并</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            #include&lt;stdio.h>
-#include&lt;stdlib.h>
-#define OK 1
-#define ERROR 0
-#define F -1
-typedef int ElemType;
-typedef int S
+                            直接上代码
+#include&lt;stdio.h>
+ #include&lt;stdlib.h>
+ #define OK 1
+ #define ERROR 0
+ #define MAXSIZE 100
+ typedef int Statu
                         
                     </div>
                     <div class="publish-info">
@@ -999,32 +1067,33 @@ typedef int S
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/06/03/xun-huan-dui-lie/">
+                <a href="/2020/06/05/lian-dui/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="循环队列">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="链队">
                         
-                        <span class="card-title">循环队列</span>
+                        <span class="card-title">链队</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            直接上代码实现语言为C语言
+                            参考教材为严蔚敏版，语言为C语言
+直接上代码
+
 #include&lt;stdio.h>
 #include&lt;stdlib.h>
 
 
 #define TRUE    1
 #define FALSE   0
-#define OK      1
-#define
+#define OK     
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-05
                             </span>
                         <span class="publish-author">
                             

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linda-gif.github.io/"/>
-  <updated>2020-06-05T15:10:20.521Z</updated>
+  <updated>2020-06-06T15:19:45.818Z</updated>
   <id>http://linda-gif.github.io/</id>
   
   <author>
@@ -17,11 +17,114 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>顺序栈的实现</title>
+    <link href="http://linda-gif.github.io/2020/06/06/shun-xu-zhan-de-shi-xian/"/>
+    <id>http://linda-gif.github.io/2020/06/06/shun-xu-zhan-de-shi-xian/</id>
+    <published>2020-06-06T15:18:51.000Z</published>
+    <updated>2020-06-06T15:19:45.818Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;直接上代码&lt;/p&gt;
+&lt;pre class=&quot; language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token macro property&quot;&gt;#&lt;span class=&quot;token directive
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="数据结构与算法" scheme="http://linda-gif.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>顺序存储的多项式合并</title>
+    <link href="http://linda-gif.github.io/2020/06/06/shun-xu-cun-chu-de-duo-xiang-shi-he-bing/"/>
+    <id>http://linda-gif.github.io/2020/06/06/shun-xu-cun-chu-de-duo-xiang-shi-he-bing/</id>
+    <published>2020-06-06T15:14:51.000Z</published>
+    <updated>2020-06-06T15:18:01.480Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;采用顺序存储的方式，实现语言为c++&lt;/p&gt;
+&lt;pre class=&quot; language-cpp&quot;&gt;&lt;code class=&quot;language-cpp&quot;&gt;&lt;span class=&quot;token macro property&quot;&gt;#&lt;span class=&quot;token
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="数据结构与算法" scheme="http://linda-gif.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>顺序表的有序合并</title>
+    <link href="http://linda-gif.github.io/2020/06/06/shun-xu-biao-de-you-xu-he-bing/"/>
+    <id>http://linda-gif.github.io/2020/06/06/shun-xu-biao-de-you-xu-he-bing/</id>
+    <published>2020-06-06T15:12:11.000Z</published>
+    <updated>2020-06-06T15:13:29.948Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;直接上代码&lt;/p&gt;
+&lt;pre class=&quot; language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token macro property&quot;&gt;#&lt;span class=&quot;token directive
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="数据结构与算法" scheme="http://linda-gif.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>单链表的实现</title>
+    <link href="http://linda-gif.github.io/2020/06/06/dan-lian-biao-de-shi-xian/"/>
+    <id>http://linda-gif.github.io/2020/06/06/dan-lian-biao-de-shi-xian/</id>
+    <published>2020-06-06T15:09:31.000Z</published>
+    <updated>2020-06-06T15:10:46.702Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;pre class=&quot; language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token macro property&quot;&gt;#&lt;span class=&quot;token directive
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="数据结构与算法" scheme="http://linda-gif.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title>链队</title>
     <link href="http://linda-gif.github.io/2020/06/05/lian-dui/"/>
     <id>http://linda-gif.github.io/2020/06/05/lian-dui/</id>
     <published>2020-06-05T15:09:03.000Z</published>
-    <updated>2020-06-05T15:10:20.521Z</updated>
+    <updated>2020-06-05T15:10:59.133Z</updated>
     
     <summary type="html">
     
@@ -49,7 +152,7 @@
     <link href="http://linda-gif.github.io/2020/06/03/xun-huan-dui-lie/"/>
     <id>http://linda-gif.github.io/2020/06/03/xun-huan-dui-lie/</id>
     <published>2020-06-03T14:52:32.000Z</published>
-    <updated>2020-06-03T15:20:55.109Z</updated>
+    <updated>2020-06-06T15:20:12.868Z</updated>
     
     <summary type="html">
     
@@ -101,8 +204,8 @@
   
   <entry>
     <title>顺序表</title>
-    <link href="http://linda-gif.github.io/2020/05/30/shunxubiao/"/>
-    <id>http://linda-gif.github.io/2020/05/30/shunxubiao/</id>
+    <link href="http://linda-gif.github.io/2020/05/30/shun-xu-biao/"/>
+    <id>http://linda-gif.github.io/2020/05/30/shun-xu-biao/</id>
     <published>2020-05-30T08:16:09.000Z</published>
     <updated>2020-06-03T15:20:59.019Z</updated>
     
@@ -122,29 +225,6 @@
     
     
       <category term="数据结构与算法" scheme="http://linda-gif.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://linda-gif.github.io/2020/04/26/hello-world/"/>
-    <id>http://linda-gif.github.io/2020/04/26/hello-world/</id>
-    <published>2020-04-26T03:23:50.376Z</published>
-    <updated>2020-04-26T10:14:27.327Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
-        
-      
-    
-    </summary>
-    
-    
     
   </entry>
   
