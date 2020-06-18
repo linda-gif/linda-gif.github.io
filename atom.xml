@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linda-gif.github.io/"/>
-  <updated>2020-06-06T15:19:45.818Z</updated>
+  <updated>2020-06-18T11:21:39.163Z</updated>
   <id>http://linda-gif.github.io/</id>
   
   <author>
@@ -15,6 +15,57 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>KMP算法</title>
+    <link href="http://linda-gif.github.io/2020/06/18/kmpp-suan-fa/"/>
+    <id>http://linda-gif.github.io/2020/06/18/kmpp-suan-fa/</id>
+    <published>2020-06-18T11:16:35.000Z</published>
+    <updated>2020-06-18T11:21:39.163Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;// KMP算法&lt;/p&gt;
+&lt;pre class=&quot; language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token macro property&quot;&gt;#&lt;span class=&quot;token directive
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="数据结构与算法" scheme="http://linda-gif.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>BF算法</title>
+    <link href="http://linda-gif.github.io/2020/06/18/bf-suan-fa/"/>
+    <id>http://linda-gif.github.io/2020/06/18/bf-suan-fa/</id>
+    <published>2020-06-18T11:12:44.000Z</published>
+    <updated>2020-06-18T11:15:34.839Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;pre class=&quot; language-c&quot;&gt;&lt;code class=&quot;language-c&quot;&gt;&lt;span class=&quot;token macro property&quot;&gt;#&lt;span class=&quot;token directive
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="数据结构与算法" scheme="http://linda-gif.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>顺序栈的实现</title>
@@ -47,7 +98,7 @@
     <link href="http://linda-gif.github.io/2020/06/06/shun-xu-cun-chu-de-duo-xiang-shi-he-bing/"/>
     <id>http://linda-gif.github.io/2020/06/06/shun-xu-cun-chu-de-duo-xiang-shi-he-bing/</id>
     <published>2020-06-06T15:14:51.000Z</published>
-    <updated>2020-06-06T15:18:01.480Z</updated>
+    <updated>2020-06-06T15:20:47.956Z</updated>
     
     <summary type="html">
     
@@ -73,7 +124,7 @@
     <link href="http://linda-gif.github.io/2020/06/06/shun-xu-biao-de-you-xu-he-bing/"/>
     <id>http://linda-gif.github.io/2020/06/06/shun-xu-biao-de-you-xu-he-bing/</id>
     <published>2020-06-06T15:12:11.000Z</published>
-    <updated>2020-06-06T15:13:29.948Z</updated>
+    <updated>2020-06-06T15:20:47.959Z</updated>
     
     <summary type="html">
     
@@ -99,7 +150,7 @@
     <link href="http://linda-gif.github.io/2020/06/06/dan-lian-biao-de-shi-xian/"/>
     <id>http://linda-gif.github.io/2020/06/06/dan-lian-biao-de-shi-xian/</id>
     <published>2020-06-06T15:09:31.000Z</published>
-    <updated>2020-06-06T15:10:46.702Z</updated>
+    <updated>2020-06-06T15:20:47.952Z</updated>
     
     <summary type="html">
     
