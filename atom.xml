@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://linda-gif.github.io/"/>
-  <updated>2020-06-18T11:21:39.163Z</updated>
+  <updated>2020-06-28T15:00:43.106Z</updated>
   <id>http://linda-gif.github.io/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>两数相加</title>
+    <link href="http://linda-gif.github.io/2020/06/28/liang-shu-xiang-jia/"/>
+    <id>http://linda-gif.github.io/2020/06/28/liang-shu-xiang-jia/</id>
+    <published>2020-06-28T14:59:20.000Z</published>
+    <updated>2020-06-28T15:00:43.106Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。&lt;/p&gt;
+&lt;p&gt;如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。&lt;/p&gt;
+&lt;p&gt;您可以假设除了数字 0
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Leetcode" scheme="http://linda-gif.github.io/tags/Leetcode/"/>
+    
+  </entry>
+  
+  <entry>
     <title>KMP算法</title>
     <link href="http://linda-gif.github.io/2020/06/18/kmpp-suan-fa/"/>
     <id>http://linda-gif.github.io/2020/06/18/kmpp-suan-fa/</id>
     <published>2020-06-18T11:16:35.000Z</published>
-    <updated>2020-06-18T11:21:39.163Z</updated>
+    <updated>2020-06-18T11:22:34.086Z</updated>
     
     <summary type="html">
     
@@ -47,7 +74,7 @@
     <link href="http://linda-gif.github.io/2020/06/18/bf-suan-fa/"/>
     <id>http://linda-gif.github.io/2020/06/18/bf-suan-fa/</id>
     <published>2020-06-18T11:12:44.000Z</published>
-    <updated>2020-06-18T11:15:34.839Z</updated>
+    <updated>2020-06-18T11:22:34.088Z</updated>
     
     <summary type="html">
     
