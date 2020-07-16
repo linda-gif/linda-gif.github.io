@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="两数相加, linda">
+    <meta name="keywords" content="二叉树递归的各种应用, linda">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>两数相加 | linda</title>
+    <title>二叉树递归的各种应用 | linda</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">两数相加</h1>
+                    <h1 class="description center-align post-title">二叉树递归的各种应用</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Leetcode/">
-                                <span class="chip bg-color">Leetcode</span>
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+                                <span class="chip bg-color">数据结构与算法</span>
                             </a>
                         
                     </div>
@@ -447,7 +447,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-06-28
+                    2020-07-16
                 </div>
                 
 
@@ -456,7 +456,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    546
+                    449
                 </div>
                 
 
@@ -473,143 +473,151 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。</p>
-<p>如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</p>
-<p>您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
-<p>示例：</p>
-<p>输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>输出：7 -&gt; 0 -&gt; 8<br>原因：342 + 465 = 807</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/add-two-numbers" target="_blank" rel="noopener">https://leetcode-cn.com/problems/add-two-numbers</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+                <pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
-<span class="token macro property">#<span class="token directive keyword">define</span> true 1</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> false 0</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> overFlow -2</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdbool.h></span></span>
+
 <span class="token macro property">#<span class="token directive keyword">define</span> MAXSIZE 100</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> OK 1</span>
-<span class="token keyword">typedef</span> <span class="token keyword">struct</span> ListNode
+
+<span class="token comment" spellcheck="true">/**二叉树数据结构定义**/</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> BiTreeNode
 <span class="token punctuation">{</span>
-    <span class="token keyword">int</span> val<span class="token punctuation">;</span>
-    <span class="token keyword">struct</span> ListNode <span class="token operator">*</span>next<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>ListNode<span class="token punctuation">,</span><span class="token operator">*</span>linklist<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//结点定义</span>
-linklist L<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> data<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> BiTreeNode <span class="token operator">*</span>left<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> BiTreeNode <span class="token operator">*</span>right<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>BiTreeNode<span class="token punctuation">,</span><span class="token operator">*</span>BiTree<span class="token punctuation">;</span>
 
-<span class="token keyword">struct</span> ListNode<span class="token operator">*</span> <span class="token function">addTwoNumbers</span><span class="token punctuation">(</span><span class="token keyword">struct</span> ListNode<span class="token operator">*</span> l1<span class="token punctuation">,</span> <span class="token keyword">struct</span> ListNode<span class="token operator">*</span> l2<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">/**二叉树的建立--按照先序方式建立--插入**/</span>
+<span class="token keyword">void</span> <span class="token function">CreateBiTree</span><span class="token punctuation">(</span>BiTree <span class="token operator">*</span>T<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
+    <span class="token keyword">char</span> val<span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%c"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    linklist L<span class="token punctuation">,</span>r<span class="token punctuation">;</span>
-    L<span class="token operator">=</span>new ListNode<span class="token punctuation">;</span>
-    L<span class="token operator">-></span>val <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    L<span class="token operator">-></span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>val <span class="token operator">==</span> <span class="token string">'#'</span><span class="token punctuation">)</span>
+        <span class="token operator">*</span>T <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//null表示为空枝</span>
 
-    r <span class="token operator">=</span> L<span class="token punctuation">;</span>
-    <span class="token keyword">int</span> carry <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">while</span><span class="token punctuation">(</span>l1 <span class="token operator">!=</span> <span class="token constant">NULL</span> <span class="token operator">||</span> l2 <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token keyword">else</span>
     <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token punctuation">(</span>l1 <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token number">0</span><span class="token punctuation">:</span>l1<span class="token operator">-></span>val<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//两个链表有谁到尾巴了就取0与别的数加</span>
-        <span class="token keyword">int</span> y <span class="token operator">=</span> <span class="token punctuation">(</span>l2 <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token number">0</span><span class="token punctuation">:</span>l2<span class="token operator">-></span>val<span class="token punctuation">;</span>
-
-        sum <span class="token operator">=</span> x <span class="token operator">+</span> y <span class="token operator">+</span> carry<span class="token punctuation">;</span>
-        carry <span class="token operator">=</span> sum <span class="token operator">/</span> <span class="token number">10</span><span class="token punctuation">;</span>
-
-        linklist p<span class="token punctuation">;</span>
-        p<span class="token operator">=</span>new ListNode<span class="token punctuation">;</span>
-
-        p<span class="token operator">-></span>val <span class="token operator">=</span> sum <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">;</span>
-        p<span class="token operator">-></span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-
-        r<span class="token operator">-></span>next <span class="token operator">=</span> p<span class="token punctuation">;</span>
-        r <span class="token operator">=</span> p<span class="token punctuation">;</span>
-
-        <span class="token keyword">if</span><span class="token punctuation">(</span>l1 <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            l1 <span class="token operator">=</span> l1<span class="token operator">-></span>next<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span>l2 <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            l2 <span class="token operator">=</span> l2<span class="token operator">-></span>next<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
+        <span class="token operator">*</span>T <span class="token operator">=</span> <span class="token punctuation">(</span>BiTree<span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>BiTreeNode<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">(</span><span class="token operator">*</span>T<span class="token punctuation">)</span><span class="token operator">-></span>data <span class="token operator">=</span> val<span class="token punctuation">;</span>
+        <span class="token function">CreateBiTree</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span><span class="token operator">*</span>T<span class="token punctuation">)</span><span class="token operator">-></span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">CreateBiTree</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span><span class="token operator">*</span>T<span class="token punctuation">)</span><span class="token operator">-></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-
-    <span class="token keyword">if</span><span class="token punctuation">(</span>carry <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword">struct</span> ListNode<span class="token operator">*</span> ca <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> ListNode<span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> ListNode<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        ca<span class="token operator">-></span>val <span class="token operator">=</span> carry<span class="token punctuation">;</span>
-        ca<span class="token operator">-></span>next <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-        r<span class="token operator">-></span>next <span class="token operator">=</span> ca<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">return</span> L<span class="token operator">-></span>next<span class="token punctuation">;</span>
-
-
 <span class="token punctuation">}</span>
 
 
-ListNode <span class="token operator">*</span><span class="token function">create</span><span class="token punctuation">(</span>linklist <span class="token operator">&amp;</span>L<span class="token punctuation">,</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
-<span class="token punctuation">{</span> 
-    <span class="token keyword">int</span> i<span class="token punctuation">;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"please enter the number of Lnode:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    ListNode <span class="token operator">*</span>p<span class="token punctuation">;</span>
-    linklist r<span class="token punctuation">;</span>
-
-    L<span class="token operator">=</span>new ListNode<span class="token punctuation">;</span>
-
-
-    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>L<span class="token operator">-></span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    L<span class="token operator">-></span>next<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-    r<span class="token operator">=</span>L<span class="token punctuation">;</span>
-
-    <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-
-       p<span class="token operator">=</span>new ListNode<span class="token punctuation">;</span>
-       <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>p<span class="token operator">-></span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-       r<span class="token operator">-></span>next<span class="token operator">=</span>p<span class="token punctuation">;</span>
-       r<span class="token operator">=</span>p<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    r<span class="token operator">-></span>next<span class="token operator">=</span><span class="token constant">NULL</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> L<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token keyword">struct</span> ListNode <span class="token operator">*</span>L<span class="token punctuation">)</span>   <span class="token comment" spellcheck="true">//输出函数</span>
+<span class="token comment" spellcheck="true">/**先序遍历  根左右**/</span>
+<span class="token keyword">void</span> <span class="token function">PreOrderTravel</span><span class="token punctuation">(</span>BiTree T<span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>L <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>T<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
         <span class="token keyword">return</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>L <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d "</span><span class="token punctuation">,</span>L<span class="token operator">-></span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        L <span class="token operator">=</span> L<span class="token operator">-></span>next<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%c "</span><span class="token punctuation">,</span>T<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">PreOrderTravel</span><span class="token punctuation">(</span>T<span class="token operator">-></span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">PreOrderTravel</span><span class="token punctuation">(</span>T<span class="token operator">-></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">/**中序遍历 左根右**/</span>
+<span class="token keyword">void</span> <span class="token function">InOrderTravel</span><span class="token punctuation">(</span>BiTree T<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>T<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token function">InOrderTravel</span><span class="token punctuation">(</span>T<span class="token operator">-></span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%c "</span><span class="token punctuation">,</span>T<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">InOrderTravel</span><span class="token punctuation">(</span>T<span class="token operator">-></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">/**后序遍历 左右根**/</span>
+<span class="token keyword">void</span> <span class="token function">TailOrderTravel</span><span class="token punctuation">(</span>BiTree T<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>T<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token function">TailOrderTravel</span><span class="token punctuation">(</span>T<span class="token operator">-></span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">TailOrderTravel</span><span class="token punctuation">(</span>T<span class="token operator">-></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%c "</span><span class="token punctuation">,</span>T<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+ <span class="token keyword">int</span> <span class="token function">Copy</span><span class="token punctuation">(</span>BiTree T<span class="token punctuation">,</span>BiTree <span class="token operator">&amp;</span>NewT<span class="token punctuation">)</span><span class="token punctuation">{</span>
+     <span class="token keyword">if</span><span class="token punctuation">(</span>T<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+     <span class="token keyword">else</span><span class="token punctuation">{</span>
+         NewT <span class="token operator">=</span> new BiTreeNode<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//开辟一块BiNode类型的空间</span>
+         NewT<span class="token operator">-></span>data <span class="token operator">=</span> T<span class="token operator">-></span>data<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//赋值</span>
+         <span class="token function">Copy</span><span class="token punctuation">(</span>T<span class="token operator">-></span>left<span class="token punctuation">,</span>NewT<span class="token operator">-></span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token function">Copy</span><span class="token punctuation">(</span>T<span class="token operator">-></span>right<span class="token punctuation">,</span>NewT<span class="token operator">-></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%c "</span><span class="token punctuation">,</span>T<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
+ <span class="token keyword">int</span> <span class="token function">Depth</span><span class="token punctuation">(</span>BiTree T<span class="token punctuation">)</span><span class="token punctuation">{</span>
+     <span class="token keyword">if</span><span class="token punctuation">(</span>T<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span>    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//空树返回0</span>
+     <span class="token keyword">else</span><span class="token punctuation">{</span>
+         <span class="token keyword">int</span> m <span class="token operator">=</span> <span class="token function">Depth</span><span class="token punctuation">(</span>T<span class="token operator">-></span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token function">Depth</span><span class="token punctuation">(</span>T<span class="token operator">-></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token keyword">if</span><span class="token punctuation">(</span>m<span class="token operator">></span>n<span class="token punctuation">)</span>    <span class="token keyword">return</span> m<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
+         <span class="token keyword">else</span>    <span class="token keyword">return</span> n<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
+
+ <span class="token keyword">int</span> <span class="token function">NodeCount</span><span class="token punctuation">(</span>BiTree T<span class="token punctuation">)</span><span class="token punctuation">{</span>
+     <span class="token keyword">if</span><span class="token punctuation">(</span>T<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span>    
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+     <span class="token keyword">else</span>
+        <span class="token keyword">return</span> <span class="token function">NodeCount</span><span class="token punctuation">(</span>T<span class="token operator">-></span>left<span class="token punctuation">)</span><span class="token operator">+</span><span class="token function">NodeCount</span><span class="token punctuation">(</span>T<span class="token operator">-></span>right<span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//n = L+R+D;</span>
+ <span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">LeadCount</span><span class="token punctuation">(</span>BiTree T<span class="token punctuation">)</span><span class="token punctuation">{</span>
+     <span class="token keyword">if</span><span class="token punctuation">(</span>T<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
+         <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+     <span class="token keyword">if</span><span class="token punctuation">(</span>T<span class="token operator">-></span>left<span class="token operator">==</span><span class="token constant">NULL</span><span class="token operator">&amp;&amp;</span>T<span class="token operator">-></span>right<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span>
+     <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+     <span class="token keyword">else</span><span class="token punctuation">{</span>
+         <span class="token keyword">return</span> <span class="token function">LeadCount</span><span class="token punctuation">(</span>T<span class="token operator">-></span>left<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">LeadCount</span><span class="token punctuation">(</span>T<span class="token operator">-></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">{</span>
-    <span class="token keyword">int</span> n<span class="token punctuation">;</span>
 
-    <span class="token keyword">struct</span> ListNode <span class="token operator">*</span>l1<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//地址</span>
-    <span class="token keyword">struct</span> ListNode <span class="token operator">*</span>l2<span class="token punctuation">;</span>
-    <span class="token keyword">struct</span> ListNode <span class="token operator">*</span>result<span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//创建尾插法创建无头节点单链表</span>
-    l1<span class="token operator">=</span><span class="token function">create</span><span class="token punctuation">(</span>L<span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    l2<span class="token operator">=</span><span class="token function">create</span><span class="token punctuation">(</span>L<span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the test code\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    BiTree T<span class="token punctuation">;</span>
+    BiTree NewT<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> m<span class="token punctuation">,</span>n<span class="token punctuation">,</span>d<span class="token punctuation">;</span>
+    T <span class="token operator">=</span> <span class="token punctuation">(</span>BiTree<span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>BiTreeNode<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"please enter the node:\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">CreateBiTree</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>T<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 
-    <span class="token comment" spellcheck="true">//调用输出链表的函数</span>
-    <span class="token function">print</span><span class="token punctuation">(</span>l1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the preOrderTravel: \n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">PreOrderTravel</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">print</span><span class="token punctuation">(</span>l2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the InOrderTravel: \n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">InOrderTravel</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    result<span class="token operator">=</span><span class="token function">addTwoNumbers</span><span class="token punctuation">(</span> l1<span class="token punctuation">,</span>  l2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">print</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the TailOrderTravel: \n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">TailOrderTravel</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the copytree: \n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">Copy</span><span class="token punctuation">(</span>T<span class="token punctuation">,</span>NewT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the depth: \n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    n<span class="token operator">=</span><span class="token function">Depth</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the NodeCount: \n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    d<span class="token operator">=</span><span class="token function">NodeCount</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the LeadCount: \n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    m<span class="token operator">=</span><span class="token function">LeadCount</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span>m<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<p><img src="https://img-blog.csdnimg.cn/20200628225633965.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzIzMDk0,size_16,color_FFFFFF,t_70" alt="运行代码如下"></p>
+<p>运行结果<br><img src="https://img-blog.csdnimg.cn/20200716222907856.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzIzMDk0,size_16,color_FFFFFF,t_70" alt="运行代码"></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -653,7 +661,7 @@ ListNode <span class="token operator">*</span><span class="token function">creat
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://linda-gif.github.io/2020/06/28/liang-shu-xiang-jia/">http://linda-gif.github.io/2020/06/28/liang-shu-xiang-jia/</a>
+                    <a href="http://linda-gif.github.io/2020/07/16/er-cha-shu-di-gui-de-ge-chong-ying-yong/">http://linda-gif.github.io/2020/07/16/er-cha-shu-di-gui-de-ge-chong-ying-yong/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -691,8 +699,8 @@ ListNode <span class="token operator">*</span><span class="token function">creat
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Leetcode/">
-                                    <span class="chip bg-color">Leetcode</span>
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
+                                    <span class="chip bg-color">数据结构与算法</span>
                                 </a>
                             
                         </div>
@@ -882,9 +890,10 @@ ListNode <span class="token operator">*</span><span class="token function">creat
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/07/16/er-cha-shu-di-gui-de-ge-chong-ying-yong/">
                     <div class="card-image">
@@ -909,9 +918,9 @@ typedef struc
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-16
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-07-16
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -920,6 +929,7 @@ typedef struc
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -938,30 +948,26 @@ typedef struc
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/06/18/kmpp-suan-fa/">
+                <a href="/2020/06/28/liang-shu-xiang-jia/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="KMP算法">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="两数相加">
                         
-                        <span class="card-title">KMP算法</span>
+                        <span class="card-title">两数相加</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            // KMP算法
-#include &lt;stdio.h>
-#include &lt;stdlib.h>
-#include &lt;string.h>
-
-
-void get_next(char *T,int next[])    //修正
+                            给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
+如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。
+您可以假设除了数字 0 之外，这两个
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-18
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-28
                             </span>
                         <span class="publish-author">
                             
@@ -974,8 +980,8 @@ void get_next(char *T,int next[])    //修正
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">
-                        <span class="chip bg-color">数据结构与算法</span>
+                    <a href="/tags/Leetcode/">
+                        <span class="chip bg-color">Leetcode</span>
                     </a>
                     
                 </div>
